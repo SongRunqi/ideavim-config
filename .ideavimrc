@@ -1,4 +1,6 @@
+" ==================================================
 " 基础设置
+" ==================================================
 set scrolloff=5     " 保持光标距离顶部/底部5行
 set hlsearch
 set incsearch      " 增量搜索
@@ -8,25 +10,55 @@ set number        " 显示行号
 set relativenumber " 显示相对行号
 set clipboard+=unnamed  " 使用系统剪贴板
 set showmode
+set visualbell        " 关闭声音提示，使用视觉提示
+set noerrorbells     " 关闭错误提示音
+
 " 设置leader键为空格
 let mapleader=" "
 
+" ==================================================
 " IDE 相关操作
-" 跳转
+" ==================================================
+" 基础跳转
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gr :action FindUsages<CR>
 nnoremap gh :action ParameterInfo<CR>
+nnoremap gk :action QuickImplementations<CR>
+nnoremap K :action QuickJavaDoc<CR>
 
-" 重构
+" 高级跳转
+nnoremap <leader>gt :action GotoTest<CR>
+nnoremap <leader>gT :action GenerateTestMethod<CR>
+nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>su :action ShowUsages<CR>
+nnoremap <leader>cu :action FindUsagesInFile<CR>
+
+" ==================================================
+" 重构和代码生成
+" ==================================================
+" 基础重构
 nnoremap <leader>r :action RenameElement<CR>
 nnoremap <leader>f :action ReformatCode<CR>
 nnoremap <leader>o :action OptimizeImports<CR>
 
-" 导航
+" 高级重构
+nnoremap <leader>rm :action ExtractMethod<CR>
+nnoremap <leader>rv :action IntroduceVariable<CR>
+nnoremap <leader>rf :action IntroduceField<CR>
+nnoremap <leader>rs :action ChangeSignature<CR>
+
+" 代码生成和补全
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gi :action ImplementMethods<CR>
+nnoremap <leader>go :action OverrideMethods<CR>
+
+" ==================================================
+" 导航和窗口管理
+" ==================================================
+" 基础导航
 nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>t :action ActivateProjectToolWindow<CR>
-nnoremap <leader>b :action ToggleLineBreakpoint<CR>
 
 " 窗口管理
 nnoremap <leader>h :action PreviousTab<CR>
@@ -34,21 +66,39 @@ nnoremap <leader>l :action NextTab<CR>
 nnoremap <leader>c :action CloseEditor<CR>
 nnoremap <leader>z :action ToggleDistractionFreeMode<CR>
 
-" 运行和调试
-nnoremap <leader>d :action Debug<CR>
-nnoremap <leader>r :action Run<CR>
-nnoremap <leader>s :action Stop<CR>
-
-" 查找
+" 快速查找
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>fc :action GotoClass<CR>
 nnoremap <leader>fa :action GotoAction<CR>
 nnoremap <leader>fs :action FindInPath<CR>
+nnoremap <leader>cs :action GotoSymbol<CR>
 
-" 代码生成和补全
-nnoremap <leader>gg :action Generate<CR>
-nnoremap <leader>gi :action ImplementMethods<CR>
-nnoremap <leader>go :action OverrideMethods<CR>
+" ==================================================
+" 运行、调试和版本控制
+" ==================================================
+" 运行和调试基础操作
+nnoremap <leader>d :action Debug<CR>
+nnoremap <leader>r :action Run<CR>
+nnoremap <leader>s :action Stop<CR>
+
+" 调试高级操作
+nnoremap <leader>db :action ToggleLineBreakpoint<CR>
+nnoremap <leader>dn :action StepOver<CR>
+nnoremap <leader>di :action StepInto<CR>
+nnoremap <leader>do :action StepOut<CR>
+nnoremap <leader>dc :action Resume<CR>
+nnoremap <leader>dr :action EvaluateExpression<CR>
+
+" Git 操作
+nnoremap <leader>gb :action Annotate<CR>
+nnoremap <leader>gh :action Vcs.ShowHistoryForBlock<CR>
+nnoremap <leader>gr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>gf :action Git.Fetch<CR>
+nnoremap <leader>gp :action Git.Pull<CR>
+
+" ==================================================
+" 代码导航
+" ==================================================
 " 错误导航
 nnoremap [e :action GotoPreviousError<CR>
 nnoremap ]e :action GotoNextError<CR>
@@ -57,15 +107,58 @@ nnoremap ]e :action GotoNextError<CR>
 nnoremap [m :action MethodUp<CR>
 nnoremap ]m :action MethodDown<CR>
 
+" 代码折叠
+nnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+nnoremap zC :action CollapseAllRegions<CR>
+nnoremap zO :action ExpandAllRegions<CR>
+
+" ==================================================
+" 常用操作增强
+" ==================================================
+" 快速移动
+nnoremap J 5j
+nnoremap K 5k
+
+" 快速保存和退出
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" 快速选择和复制
+nnoremap <leader>a ggVG
+nnoremap Y y$
+
+" 注释
+nnoremap <leader>/ :action CommentByLineComment<CR>
+nnoremap <leader>? :action CommentByBlockComment<CR>
+
+" 居中显示搜索结果
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+
+" ==================================================
+" IDE 功能和插件设置
+" ==================================================
 " 集成 IDE 功能
 set ideajoin    " 智能 join 行
 set idearefactormode=keep  " 保持重构模式
 set ideavimsupport=   " 在对话框中使用 IdeaVim
+set ideamarks    " 在 IDE 中显示 Vim 标记
 
-" 常用插件模拟
+" 插件模拟
 set surround    " vim-surround 插件功能
 set multiple-cursors  " 多光标支持
 set commentary   " 注释功能
 set ReplaceWithRegister  " 替换功能
+set textobj-entire    " 支持整个缓冲区文本对象
+set argtextobj       " 支持参数文本对象
+set highlightedyank  " 复制时高亮
+set exchange        " 支持交换文本
+set easymotion     " 快速移动
 set which-key
 set notimeout
+
+" highlightedyank 持续时间
+let g:highlightedyank_highlight_duration = "1000"
