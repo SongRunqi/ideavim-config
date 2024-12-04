@@ -1,0 +1,71 @@
+" 基础设置
+set scrolloff=5     " 保持光标距离顶部/底部5行
+set hlsearch
+set incsearch      " 增量搜索
+set ignorecase    " 搜索时忽略大小写
+set smartcase     " 如果搜索包含大写字母，则切换到大小写敏感
+set number        " 显示行号
+set relativenumber " 显示相对行号
+set clipboard+=unnamed  " 使用系统剪贴板
+set showmode
+" 设置leader键为空格
+let mapleader=" "
+
+" IDE 相关操作
+" 跳转
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gh :action ParameterInfo<CR>
+
+" 重构
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>o :action OptimizeImports<CR>
+
+" 导航
+nnoremap <leader>e :action SelectInProjectView<CR>
+nnoremap <leader>t :action ActivateProjectToolWindow<CR>
+nnoremap <leader>b :action ToggleLineBreakpoint<CR>
+
+" 窗口管理
+nnoremap <leader>h :action PreviousTab<CR>
+nnoremap <leader>l :action NextTab<CR>
+nnoremap <leader>c :action CloseEditor<CR>
+nnoremap <leader>z :action ToggleDistractionFreeMode<CR>
+
+" 运行和调试
+nnoremap <leader>d :action Debug<CR>
+nnoremap <leader>r :action Run<CR>
+nnoremap <leader>s :action Stop<CR>
+
+" 查找
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fc :action GotoClass<CR>
+nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>fs :action FindInPath<CR>
+
+" 代码生成和补全
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gi :action ImplementMethods<CR>
+nnoremap <leader>go :action OverrideMethods<CR>
+" 错误导航
+nnoremap [e :action GotoPreviousError<CR>
+nnoremap ]e :action GotoNextError<CR>
+
+" 方法导航
+nnoremap [m :action MethodUp<CR>
+nnoremap ]m :action MethodDown<CR>
+
+" 集成 IDE 功能
+set ideajoin    " 智能 join 行
+set idearefactormode=keep  " 保持重构模式
+set ideavimsupport=   " 在对话框中使用 IdeaVim
+
+" 常用插件模拟
+set surround    " vim-surround 插件功能
+set multiple-cursors  " 多光标支持
+set commentary   " 注释功能
+set ReplaceWithRegister  " 替换功能
+set which-key
+set notimeout
