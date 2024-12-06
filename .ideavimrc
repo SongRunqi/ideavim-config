@@ -10,9 +10,10 @@ set number        " 显示行号
 set relativenumber " 显示相对行号
 set clipboard+=unnamed  " 使用系统剪贴板
 set showmode
-set visualbell        " 关闭声音提示，使用视觉提示
+" set visualbell        " 关闭声音提示，使用视觉提示
 set noerrorbells     " 关闭错误提示音
-
+" 按下Esc两次清除搜索高亮
+nnoremap <esc><esc> :nohlsearch<CR>
 " 设置leader键为空格
 let mapleader=" "
 
@@ -59,6 +60,7 @@ nnoremap <leader>go :action OverrideMethods<CR>
 " 基础导航
 nnoremap <leader>e :action SelectInProjectView<CR>
 nnoremap <leader>t :action ActivateProjectToolWindow<CR>
+
 
 " 窗口管理
 nnoremap <leader>h :action PreviousTab<CR>
@@ -129,8 +131,6 @@ nnoremap <leader>a ggVG
 nnoremap Y y$
 
 " 注释
-nnoremap <leader>/ :action CommentByLineComment<CR>
-nnoremap <leader>? :action CommentByBlockComment<CR>
 
 " 居中显示搜索结果
 nnoremap n nzz
@@ -172,7 +172,6 @@ sethandler <C-j> a:vim
 sethandler <C-k> a:vim
 
 " 项目工具窗口导航映射
-nnoremap <leader>t :action ActivateProjectToolWindow<CR>
 
 " 定义项目窗口中的快捷键
 sethandler <C-h> a:vim
@@ -183,7 +182,8 @@ nnoremap <C-h> :action CollapseAll<CR>
 nnoremap <C-l> :action ExpandAll<CR>
 
 " 在项目窗口中的导航和操作
-nnoremap <A-1> :action ActivateProjectToolWindow<CR>
+" 在项目视图中定位当前文件
+nnoremap <leader>fp :action SelectInProjectView<CR>
 
 " 仅在项目窗口中生效的映射
 nnoremap ,j :action Tree-selectNext<CR>
@@ -191,7 +191,7 @@ nnoremap ,k :action Tree-selectPrevious<CR>
 nnoremap ,h :action Tree-collapseOne<CR>
 nnoremap ,l :action Tree-expandOne<CR>
 nnoremap ,m :action ShowPopupMenu<CR>
-nnoremap ,e :action EditSource<CR>
+nnoremap ,e :action EditSource<CR
 
 " 最近文件和位置
 nnoremap <leader>rf :action RecentFiles<CR>
@@ -275,6 +275,3 @@ nnoremap <leader>mi :action Maven.Install<CR>
 
 " 运行 Maven 测试
 nnoremap <leader>mt :action Maven.Test<CR>
-
-" highlightedyank 持续时间
-let g:highlightedyank_highlight_duration = "1000"
