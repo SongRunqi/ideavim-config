@@ -1,0 +1,276 @@
+" ==================================================
+" 基础设置
+" ==================================================
+set scrolloff=5     " 保持光标距离顶部/底部5行
+set hlsearch
+set incsearch      " 增量搜索
+set ignorecase    " 搜索时忽略大小写
+set smartcase     " 如果搜索包含大写字母，则切换到大小写敏感
+set number        " 显示行号
+set relativenumber " 显示相对行号
+set clipboard+=unnamed  " 使用系统剪贴板
+set showmode
+set history=1000 " 确保跳转
+" set visualbell        " 关闭声音提示，使用视觉提示
+set noerrorbells     " 关闭错误提示音
+" 按下Esc两次清除搜索高亮
+nnoremap <esc><esc> :nohlsearch<CR>
+" 设置leader键为空格
+let mapleader=" "
+
+" =================================================
+" IDE 相关操作
+" ==================================================
+" 基础跳转
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gh :action ParameterInfo<CR>
+nnoremap gk :action QuickImplementations<CR>
+nnoremap K :action QuickJavaDoc<CR>
+nnoremap <A-]> :action Forward<CR>
+nnoremap <A-[> :action Back<CR>
+" 高级跳转
+nnoremap <leader>gt :action GotoTest<CR>
+nnoremap <leader>gT :action GenerateTestMethod<CR>
+nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>su :action ShowUsages<CR>
+" nnoremap <leader>cu :action FindUsagesInFile<CR>
+
+" ==================================================
+" 重构和代码生成
+" ==================================================
+" 基础重构
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <leader>o :action OptimizeImports<CR>
+
+" 高级重构
+nnoremap <leader>rm :action ExtractMethod<CR>
+nnoremap <leader>rv :action IntroduceVariable<CR>
+nnoremap <leader>rf :action IntroduceField<CR>
+nnoremap <leader>rs :action ChangeSignature<CR>
+
+" 代码生成和补全
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gi :action ImplementMethods<CR>
+nnoremap <leader>go :action OverrideMethods<CR>
+
+" ==================================================
+" 导航和窗口管理
+" ==================================================
+" 基础导航
+nnoremap <leader>e :action SelectInProjectView<CR>
+nnoremap <leader>t :action ActivateProjectToolWindow<CR>
+
+
+" 窗口管理
+nnoremap <leader>h :action PreviousTab<CR>
+nnoremap <leader>l :action NextTab<CR>
+nnoremap <leader>c :action CloseEditor<CR>
+nnoremap <leader>z :action ToggleDistractionFreeMode<CR>
+
+" 快速查找
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fc :action GotoClass<CR>
+nnoremap <leader>fa :action GotoAction<CR>
+nnoremap <leader>fp :action FindInPath<CR>
+nnoremap <leader>fs :action GotoSymbol<CR>
+
+" ==================================================
+" 运行、调试和版本控制
+" ==================================================
+" 运行和调试基础操作
+nnoremap <leader>d :action Debug<CR>
+nnoremap <leader>r :action Run<CR>
+nnoremap <leader>s :action Stop<CR>
+
+" 调试高级操作
+nnoremap <leader>db :action ToggleLineBreakpoint<CR>
+nnoremap <leader>dn :action StepOver<CR>
+nnoremap <leader>di :action StepInto<CR>
+nnoremap <leader>do :action StepOut<CR>
+nnoremap <leader>dc :action Resume<CR>
+nnoremap <leader>dr :action EvaluateExpression<CR>
+
+" Git 操作
+nnoremap <leader>gb :action Annotate<CR>
+nnoremap <leader>gh :action Vcs.ShowHistoryForBlock<CR>
+nnoremap <leader>gr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>gf :action Git.Fetch<CR>
+nnoremap <leader>gp :action Git.Pull<CR>
+
+" ==================================================
+" 代码导航
+" ==================================================
+" 错误导航
+nnoremap [e :action GotoPreviousError<CR>
+nnoremap ]e :action GotoNextError<CR>
+
+" 方法导航
+nnoremap [m :action MethodUp<CR>
+nnoremap ]m :action MethodDown<CR>
+
+" 代码折叠
+nnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+nnoremap zC :action CollapseAllRegions<CR>
+nnoremap zO :action ExpandAllRegions<CR>
+
+" ==================================================
+" 常用操作增强
+" ==================================================
+
+" 快速保存和退出
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" 快速选择和复制
+nnoremap <leader>a ggVG
+nnoremap Y y$
+
+" 注释
+
+" 居中显示搜索结果
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+
+" ==================================================
+" IDE 功能和插件设置
+" ==================================================
+" 集成 IDE 功能
+set ideajoin    " 智能 join 行
+set idearefactormode=keep  " 保持重构模式
+set ideavimsupport=   " 在对话框中使用 IdeaVim
+set ideamarks    " 在 IDE 中显示 Vim 标记
+
+" 插件模拟
+set surround    " vim-surround 插件功能
+set multiple-cursors  " 多光标支持
+set commentary   " 注释功能
+set ReplaceWithRegister  " 替换功能
+set textobj-entire    " 支持整个缓冲区文本对象
+set argtextobj       " 支持参数文本对象
+set highlightedyank  " 复制时高亮
+set exchange        " 支持交换文本
+set easymotion     " 快速移动
+set which-key
+set notimeout
+
+" 项目窗口操作
+" 打开项目窗口
+nnoremap <leader>t :action ActivateProjectToolWindow<CR>
+" 在项目窗口中导航
+" ==================================================
+" 项目窗口专用映射
+" ==================================================
+" 在项目窗口中使用 Vim 导航
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+
+" 项目工具窗口导航映射
+
+" 定义项目窗口中的快捷键
+sethandler <C-h> a:vim
+sethandler <C-l> a:vim
+
+" 项目窗口中的键位映射
+nnoremap <C-h> :action CollapseAll<CR>
+nnoremap <C-l> :action ExpandAll<CR>
+
+" 在项目窗口中的导航和操作
+" 在项目视图中定位当前文件
+nnoremap <leader>fp :action SelectInProjectView<CR>
+
+" 仅在项目窗口中生效的映射
+nnoremap ,j :action Tree-selectNext<CR>
+nnoremap ,k :action Tree-selectPrevious<CR>
+nnoremap ,h :action Tree-collapseOne<CR>
+nnoremap ,l :action Tree-expandOne<CR>
+nnoremap ,m :action ShowPopupMenu<CR>
+nnoremap ,e :action EditSource<CR
+
+" 最近文件和位置
+nnoremap <leader>rf :action RecentFiles<CR>
+nnoremap <leader>rl :action RecentLocations<CR>
+nnoremap <leader>rp :action ManageRecentProjects<CR>
+
+" 在任意位置创建文件
+" 1. 使用 <leader>rf 打开最近文件列表
+" 2. 找到目标模块/包的任意文件
+" 3. 在该文件上使用 <leader>e 选择在项目视图中显示
+" 4. 然后使用 m 调出上下文菜单创建新文件
+
+" 快速在当前文件所在目录创建文件
+nnoremap <leader>nf :action NewElement<CR>
+" 复制当前文件的路径
+" nnoremap <leader>cp :action CopyPaths<CR>
+" 复制当前文件引用（fully qualified name）
+" nnoremap <leader>cr :action CopyReference<CR>
+" ==================================================
+" 文件创建和模板
+" ==================================================
+" 创建新的Java类
+nnoremap <leader>nc :action NewClass<CR>
+
+" 创建新的Java接口
+nnoremap <leader>ni :action NewClass<CR>
+
+" 创建新文件
+nnoremap <leader>nf :action NewFile<CR>
+
+" 创建新的包（文件夹）
+nnoremap <leader>np :action NewDir<CR>
+
+" 创建测试类
+nnoremap <leader>nt :action Gradle.CreateTest<CR>
+
+" ==================================================
+" Java 特定操作
+" ==================================================
+" 生成构造函数
+nnoremap <leader>gc :action GenerateConstructor<CR>
+
+" 生成getter和setter
+nnoremap <leader>gg :action GenerateGetterAndSetter<CR>
+
+" 生成equals() 和 hashCode()
+nnoremap <leader>ge :action GenerateEquals<CR>
+
+" 生成toString()
+nnoremap <leader>gs :action GenerateToString<CR>
+
+" 导入所有需要的类
+nnoremap <leader>ia :action OptimizeImports<CR>
+
+" 组织导入（删除未使用的导入）
+nnoremap <leader>oi :action OptimizeImports<CR>
+
+" 添加缺失的导入
+nnoremap <leader>ai :action ImportClass<CR>
+
+" 快速修复
+nnoremap <leader>qf :action QuickFixes<CR>
+
+" 显示上下文操作
+" nnoremap <leader>ca :action ShowIntentionActions<CR>
+
+" 生成代码（显示生成代码菜单）
+nnoremap <leader>gm :action Generate<CR>
+
+" ==================================================
+" Maven/Gradle 操作
+" ==================================================
+" 重新导入项目
+nnoremap <leader>mr :action Maven.Reimport<CR>
+
+" 运行 Maven 清理
+nnoremap <leader>mc :action Maven.Clean<CR>
+
+" 运行 Maven 安装
+nnoremap <leader>mi :action Maven.Install<CR>
+
+" 运行 Maven 测试
+nnoremap <leader>mt :action Maven.Test<CR>
